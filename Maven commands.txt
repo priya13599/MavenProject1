@@ -1,0 +1,104 @@
+
+CHECK FOR MAVEN VERSION/SETUP
+------------------------------
+mvn -version
+
+
+ENVIRONMENT VARIABLES SETUP
+------------------------------
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_131
+M2_HOME=D:\Backup\apache-maven-3.1.1
+PATH=C:\Program Files\Java\jdk1.8.0_131\bin;D:\Backup\apache-maven-3.1.1\bin
+
+
+
+1. CREATE CORE JAVA PROJECT USING MAVEN:
+--------------------------------------
+mvn archetype:generate -DgroupId=com.nucleus -DartifactId=NCSPP6SpringCore -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false          
+
+
+COMPILING PROJECT:
+-------------------
+mvn compile
+OR
+mvn clean compile
+
+
+IMPORT PROJECT IN ECLIPSE:
+----------------------------
+mvn eclipse:eclipse
+
+----------------------------------------------------------------------
+
+RUN PROJECT FROM COMMAND LINE:
+-------------------------------
+<build>
+  <plugins>
+  <plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>exec-maven-plugin</artifactId>
+  <version>1.1</version>
+  <executions><execution>
+    <goals><goal>java</goal></goals>
+  </execution></executions>
+  <configuration>
+    <mainClass>com.nucleus.prj1.App</mainClass>
+  </configuration>
+</plugin>
+  </plugins>
+  </build>
+
+
+========================================================================
+2. CREATE WEB APPLICATION USING MAVEN:
+---------------------------------------
+mvn archetype:generate -DgroupId=com.nucleus -DartifactId=NCSPWebApp1 -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+
+
+COMPILING PROJECT:
+-------------------
+mvn compile
+OR
+mvn clean compile
+
+
+IMPORT PROJECT IN ECLIPSE:
+----------------------------
+mvn eclipse:eclipse
+
+
+ADD  TOMCAT PLUGIN:
+--------------------
+  <build>
+    <finalName>NCSPWebApp1</finalName>
+    <plugins>
+    <plugin>
+			<groupId>org.apache.tomcat.maven</groupId>
+  <artifactId>tomcat7-maven-plugin</artifactId>
+  <version>2.1</version>
+				<configuration>
+					<url>http://localhost:8080/MavenSpringHibernate</url>
+	<server>mytomcat</server>
+					<path>/MavenSpringHibernate</path>
+				</configuration>
+			</plugin>
+			</plugins>
+  </build>
+
+
+
+RUN WEBAPP:
+---------------
+mvn tomcat7:run
+
+
+
+
+MANUALLY INSTALL OJDBC14 IN LOCAL REPOSITORY:
+----------------------------------------------
+mvn install:install-file -Dfile=D:\ojdbc14.jar -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0 -Dpackaging=jar
+
+spring.datasource.url=jdbc:oracle:thin:@10.1.50.198:1521:orcl
+
+
